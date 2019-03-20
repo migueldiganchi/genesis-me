@@ -1,11 +1,17 @@
 <?php
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+if (env("APP_ENV") == "local") {
+    $host = env("DB_HOST");
+    $username = env("DB_USERNAME");
+    $password = env("DB_PASSWORD");
+    $database = env("DB_DATABASE");
+} else {
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $host = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $database = substr($url["path"], 1);
+}
 
 return [
 
@@ -47,8 +53,8 @@ return [
             'username' => $username,
             'password' => $password,
             'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'charset' => env('DB_CHARSET', 'utf8'),
+            'collation' => env('DB_COLLATION', 'utf8_general_ci'),
             'prefix' => env('DB_PREFIX', ''),
             'strict' => env('DB_STRICT_MODE', true),
             'engine' => env('DB_ENGINE', null),
