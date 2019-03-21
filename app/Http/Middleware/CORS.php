@@ -29,7 +29,7 @@ class CORS
 
         $response = $next($request);
         foreach($headers as $key => $header) {
-            $response->header($key, $value);
+            $response->header($key, $header);
         }
 
         return $response;
