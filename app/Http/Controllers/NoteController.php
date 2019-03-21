@@ -28,11 +28,11 @@ class NoteController extends Controller
         if (!empty($errors)) {
             return response()->json($errors, 422);
         }
+
         $note = new Note();
         $note->title = $request->title;
         $note->content = $request->content;
         $note->save();
-
         return response()->json($note);
     }
 
@@ -46,11 +46,11 @@ class NoteController extends Controller
         if (!empty($errors)) {
             return response()->json($errors, 422);
         }
+
         $note = Note::find($id);
         $note->title = $request->input('title');
         $note->content = $request->input('content');
         $note->save();
-
         return response()->json($note);
     }
 
@@ -62,7 +62,6 @@ class NoteController extends Controller
     public function destroy($id) {
         $note = Note::find($id);
         $note->delete();
-
         return response()->json([
             'status' => true,
             'message' => 'Note removed successfully'
@@ -80,7 +79,7 @@ class NoteController extends Controller
             'title' => 'required|min:3|max:42',
             'content' => 'required|min:3|max:75'
         ];
-        
+
         $messages = [ 
             'required' => 'This field is required', 
             'min' => 'Too short', 
