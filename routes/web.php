@@ -18,6 +18,6 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api/notes'], function ($router) {
    $router->get('/', 'NoteController@index');
    $router->post('/', 'NoteController@store');
-   $router->patch('/{id}', 'NoteController@update');
+   $router->put('/{id}', 'NoteController@update');
    $router->delete('/{id}', 'NoteController@destroy');
 });
